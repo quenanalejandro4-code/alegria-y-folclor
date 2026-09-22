@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alegría y Folclor | Bienvenidos</title>
+    
+    <!-- Conexión con Google Fonts -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --color-verde-oscuro: #0A291B; 
@@ -25,100 +31,131 @@
             align-items: center;
             overflow: hidden;
             opacity: 0;
-            transition: opacity 0.6s ease-in-out;
+            transition: opacity 0.5s ease-in-out;
+            -webkit-tap-highlight-color: transparent; /* Elimina el cuadro azul feo al tocar en celulares */
         }
 
         body.fade-in {
             opacity: 1;
         }
 
+        /* Contenedor del botón táctil y clicable */
         .logo-welcome-container {
             text-align: center;
             cursor: pointer;
             display: flex;
             flex-direction: column;
             align-items: center;
+            padding: 20px;
+            user-select: none;
         }
 
-        /* Control perfecto y redondo para la imagen PNG */
+        /* Ajuste perfecto y responsivo del Logotipo PNG */
         .logo-welcome-container img {
-            width: 280px; 
-            height: 280px;
-            object-fit: cover; /* Mantiene la proporción perfecta del logo circular */
+            width: 260px; 
+            height: 260px;
+            max-width: 80vw; /* Evita que en pantallas de celulares muy pequeños el logo se salga */
+            max-height: 80vw;
+            object-fit: cover; 
             border-radius: 50%;
             border: 3px solid var(--color-verde-acento);
             padding: 6px;
             background-color: #FFFFFF;
-            box-shadow: 0 20px 50px rgba(10, 41, 27, 0.12);
+            box-shadow: 0 20px 40px rgba(10, 41, 27, 0.12);
             animation: respirarLogo 4s ease-in-out infinite;
-            transition: all 0.5s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .logo-welcome-container:hover img {
-            transform: scale(1.03);
-            box-shadow: 0 25px 60px rgba(13, 92, 58, 0.2);
-        }
-
+        /* Texto de invitación elegante */
         .enter-text {
-            margin-top: 3rem; 
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            margin-top: 2.5rem; 
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
             font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
             color: var(--color-verde-oscuro);
             opacity: 0.6;
             transition: all 0.4s ease;
         }
 
-        .logo-welcome-container:hover .enter-text {
-            opacity: 1;
-            letter-spacing: 6px;
-            color: var(--color-verde-acento);
-        }
-
+        /* Animación suave de flotación */
         @keyframes respirarLogo {
             0% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-8px); }
             100% { transform: translateY(0); }
         }
 
+        /* Efectos visuales para PC */
+        @media (min-width: 769px) {
+            .logo-welcome-container:hover img {
+                transform: scale(1.03);
+                box-shadow: 0 25px 50px rgba(13, 92, 58, 0.2);
+            }
+            .logo-welcome-container:hover .enter-text {
+                opacity: 1;
+                letter-spacing: 7px;
+                color: var(--color-verde-acento);
+            }
+        }
+
+        /* Desvanecimiento de salida fluido */
         body.fade-out {
             opacity: 0;
-            transform: scale(0.98);
-            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+            transform: scale(0.97);
+            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
         }
     </style>
 </head>
 <body>
 
+    <!-- Elemento de Audio Oculto -->
     <audio id="welcome-audio" src="viento_andino.mp3" preload="auto"></audio>
 
     <div class="logo-welcome-container" id="enter-site-btn">
-        <!-- Cambiado oficialmente a .png para solucionar el problema -->
         <img src="logo_alegria_y_folclor.png" alt="Logotipo Oficial Alegría y Folclor">
         <div class="enter-text">Entrar al sitio</div>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            // Muestra la pantalla suavemente
             setTimeout(() => {
                 document.body.classList.add("fade-in");
             }, 50);
 
             const enterBtn = document.getElementById("enter-site-btn");
             const audioEfecto = document.getElementById("welcome-audio");
-            
-            enterBtn.addEventListener("click", () => {
-                if(audioEfecto) {
-                    audioEfecto.volume = 0.5;
+            let yaHizoClic = false; // Evita que se presione dos veces seguidas
+
+            // Función unificada para avanzar de página de forma segura
+            function entrarAlSitio() {
+                if (yaHizoClic) return;
+                yaHizoClic = true;
+
+                // 1. Intentar reproducir audio con un sistema "salvavidas"
+                if (audioEfecto) {
+                    audioEfecto.volume = 0.4;
+                    // El truco secreto: si el celular frena el sonido, el .catch lo atrapa y no traba la pantalla
                     audioEfecto.play().catch(error => {
-                        console.log("Audio bloqueado:", error);
+                        console.log("Audio omitido de forma segura en celular:", error);
                     });
                 }
+
+                // 2. Ejecutar desvanecimiento visual
                 document.body.classList.add("fade-out");
+                
+                // 3. Redirección garantizada a los 400 milisegundos (funciona sí o sí)
                 setTimeout(() => {
                     window.location.href = "inicio.html";
-                }, 600);
+                }, 400);
+            }
+
+            // Detecta tanto el clic de mouse (PC) como el toque de dedo (Pantallas táctiles / Celulares)
+            enterBtn.addEventListener("click", entrarAlSitio);
+            enterBtn.addEventListener("touchstart", (e) => {
+                e.preventDefault(); // Evita clics dobles fantasmas en celulares
+                entrarAlSitio();
             });
         });
     </script>
