@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Alegría y Folclor | Bienvenidos</title>
+    
+    <!-- Conexión tipográfica premium de Google Fonts -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Montserrat:wght@500&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 🎨 PALETA DE AZULES DE TU IMAGEN (BLOQUEO DE PANTALLA) */
+        html, body {
+            background-color: #0F1C30 !important; /* Azul Noche Profundo obligatorio para máximo impacto visual */
+            height: 100vh !important;
+            height: -webkit-fill-available !important; 
+            width: 100vw !important;
+            overflow: hidden !important; /* Prohíbe terminantemente rodar la pantalla hacia abajo en celulares */
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body.fade-in {
+            opacity: 1;
+        }
+
+        /* Caja de contenido perfectamente centrada en el plano vertical y horizontal */
+        .contenedor-bienvenida {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            padding: 24px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* El logotipo redondo PNG de Alegría y Folclor */
+        .contenedor-bienvenida img {
+            width: 220px;
+            height: 220px;
+            max-width: 65vw;
+            max-height: 65vw;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #668DC0; /* Borde en Azul Brillante para amarrar la paleta */
+            padding: 6px;
+            background-color: #FFFFFF;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+            animation: flotarLogo 4s ease-in-out infinite;
+            transition: transform 0.3s ease;
+        }
+
+        /* Nombre del grupo en tipografía de gala Cinzel Decorative */
+        .titulo-bienvenida {
+            font-family: 'Cinzel Decorative', serif;
+            font-weight: 700;
+            font-size: 2rem;
+            color: #FFFFFF; /* Blanco puro para máximo contraste con el fondo oscuro */
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 2.2rem;
+            line-height: 1.3;
+            max-width: 85vw;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.4);
+        }
+
+        /* Lema oficial del grupo con fuente Montserrat */
+        .lema-bienvenida {
+            margin-top: 1.4rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 1.05rem;
+            color: #C0D0EF; /* Azul Celeste de tu imagen: se lee con una nitidez hermosa y elegante */
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.8;
+            transition: all 0.4s ease;
+        }
+
+        @keyframes flotarLogo {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0); }
+        }
+
+        body.fade-out {
+            opacity: 0;
+            transform: scale(0.97);
+            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+        }
+
+        /* Optimización e interacciones exclusivas para computadoras (PC) */
+        @media (min-width: 769px) {
+            .contenedor-bienvenida:hover img { 
+                transform: scale(1.03); 
+                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+            }
+            .contenedor-bienvenida:hover .lema-bienvenida {
+                color: #FFFFFF;
+                opacity: 1;
+                letter-spacing: 3px;
+            }
+            .titulo-bienvenida { 
+                font-size: 3rem; 
+                letter-spacing: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Archivo de Sonido de Vientos Místicos -->
+    <audio id="welcome-audio" src="viento_andino.mp3" preload="auto"></audio>
+
+    <!-- Al tocar cualquier parte de la pantalla táctil o dar clic, se activa la entrada segura -->
+    <div class="contenedor-bienvenida" id="enter-site-btn">
+        <img src="logo_alegria_y_folclor.png" alt="Logotipo Alegría y Folclor">
+        <h2 class="titulo-bienvenida">Alegría y Folclor</h2>
+        <div class="lema-bienvenida">Bailando con el corazón</div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Revela la interfaz con un desvanecimiento elegante
+            setTimeout(() => {
+                document.body.classList.add("fade-in");
+            }, 50);
+
+            const enterBtn = document.getElementById("enter-site-btn");
+            const audioEfecto = document.getElementById("welcome-audio");
+            let transicionEnProgreso = false;
+
+            function irAlInicio() {
+                if (transicionEnProgreso) return;
+                transicionEnProgreso = true;
+
+                // Sistema de sonido salvavidas optimizado para PC y Celulares
+                if (audioEfecto) {
+                    audioEfecto.volume = 0.4;
+                    audioEfecto.play().catch(() => { 
+                        /* Atrapa el bloqueo de navegadores móviles en silencio para no congelar la pantalla */ 
+                    });
+                }
+
+                // Desvanece la pantalla hacia el color azul oscuro profundo
+                document.body.classList.add("fade-out");
+                
+                // Redirecciona obligatoriamente a la portada interna compartiendo la misma lógica
+                setTimeout(() => {
+                    window.location.href = "inicio.html";
+                }, 400);
+            }
+
+            // Soporte dual táctil y clic inmediato
+            enterBtn.addEventListener("click", irAlInicio);
+            enterBtn.addEventListener("touchstart", (e) => {
+                e.preventDefault(); // Detiene clics dobles fantasmas en pantallas móviles
+                irAlInicio();
+            });
+        });
+    </script>
+
+</body>
+</html>

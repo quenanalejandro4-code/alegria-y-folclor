@@ -1,0 +1,427 @@
+/* ==========================================
+   🔗 IMPORTACIÓN DE TIPOGRAFÍAS PREMIUM 
+   ========================================== */
+@import url('https://googleapis.com');
+
+/* 🎨 PALETA DE AZULES DE TU IMAGEN (ALTO CONTRASTE) */
+:root {
+    --color-gris-hielo: #C2C6CE;    
+    --color-azul-celeste: #C0D0EF;  
+    --color-azul-brillante: #668DC0;
+    --color-azul-marino: #304A6E;   
+    --color-azul-profundo: #0F1C30; 
+    --color-blanco-puro: #FFFFFF;   
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--color-azul-celeste);
+    color: var(--color-azul-profundo);
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+body.fade-in {
+    opacity: 1;
+}
+
+/* Guardas Laterales de Rombos (Solo en PC) */
+@media (min-width: 769px) {
+    body::before, body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        width: 24px;
+        z-index: 5;
+        opacity: 0.25;
+        pointer-events: none;
+        background-image: linear-gradient(135deg, var(--color-azul-brillante) 25%, transparent 25%), 
+                          linear-gradient(222deg, var(--color-azul-brillante) 25%, transparent 25%), 
+                          linear-gradient(45deg, var(--color-azul-brillante) 25%, transparent 25%), 
+                          linear-gradient(315deg, var(--color-azul-brillante) 25%, transparent 25%);
+        background-position: 12px 0, 12px 0, 0 0, 0 0;
+        background-size: 24px 24px;
+        background-repeat: repeat-y;
+    }
+    body::before { left: 15px; }
+    body::after { right: 15px; }
+}
+
+/* 🟢 ENCABEZADO MULTIPÁGINA REPARADO */
+header {
+    background-color: transparent; 
+    padding: 1.5rem 2rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 90px; 
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    z-index: 1100;
+}
+
+/* Control estricto para que la foto no se abra gigante */
+.logo-container img {
+    width: 45px !important;
+    height: 45px !important;
+    max-width: 45px !important;
+    max-height: 45px !important;
+    border-radius: 50% !important;
+    border: 2px solid var(--color-azul-brillante) !important;
+    background-color: var(--color-blanco-puro) !important;
+    margin-right: 12px !important;
+    object-fit: cover !important;
+    flex-shrink: 0 !important;
+    display: inline-block !important;
+}
+
+.logo-container h1 {
+    font-family: 'Cinzel Decorative', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-blanco-puro); 
+    text-shadow: 1px 1px 4px rgba(15, 28, 48, 0.5);
+    white-space: nowrap !important;
+}
+
+body.pagina-clara .logo-container h1 {
+    color: var(--color-azul-profundo);
+    text-shadow: none;
+}
+
+/* 🔘 EL BOTÓN DE TRES PUNTOS VERTICALES CON CANDADO ANTI-ESTIRAMIENTO */
+.menu-toggle-dots {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 32px !important;
+    height: 32px !important; 
+    max-width: 32px !important;
+    max-height: 32px !important;
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer;
+    z-index: 1200;
+    padding: 4px 0 !important;
+    flex-shrink: 0 !important; 
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Los 3 puntos redondos corregidos */
+.menu-toggle-dots span {
+    width: 6px !important;
+    height: 6px !important;
+    max-width: 6px !important;
+    max-height: 6px !important;
+    background-color: var(--color-blanco-puro) !important; 
+    border-radius: 50% !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 1px 1px 3px rgba(15, 28, 48, 0.4);
+    display: block !important;
+    flex-shrink: 0 !important;
+}
+
+body.pagina-clara .menu-toggle-dots span {
+    background-color: var(--color-azul-profundo) !important;
+    box-shadow: none;
+}
+
+/* Animación limpia: los 3 puntos se vuelven una X perfecta al abrir */
+.menu-toggle-dots.active span:nth-child(1) {
+    transform: translateY(10px) rotate(45deg) !important;
+    border-radius: 2px !important;
+    width: 22px !important;
+    height: 2px !important;
+    background-color: var(--color-blanco-puro) !important;
+}
+.menu-toggle-dots.active span:nth-child(2) {
+    opacity: 0 !important;
+}
+.menu-toggle-dots.active span:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg) !important;
+    border-radius: 2px !important;
+    width: 22px !important;
+    height: 2px !important;
+    background-color: var(--color-blanco-puro) !important;
+}
+
+/* 🧭 PANEL DE MENÚ DESPLEGABLE EN CORTINA LATERAL */
+nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 320px; 
+    height: 100vh;
+    background-color: rgba(15, 28, 48, 0.98); 
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    transform: translateX(100%); 
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 1150; 
+}
+
+nav.open {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+nav a {
+    color: rgba(192, 208, 239, 0.7); 
+    text-decoration: none;
+    margin: 1.5rem 0;
+    font-weight: 500;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-align: center;
+}
+
+nav a:hover, nav a.active {
+    color: var(--color-blanco-puro);
+    transform: scale(1.04);
+}
+
+/* 🔵 PORTADA INTEGRAL DE INICIO (HERO) */
+.hero {
+    background: linear-gradient(rgba(15, 28, 48, 0.8), rgba(15, 28, 48, 0.88)), url('fondo_portada.jpg') no-repeat center center/cover;
+    height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-blanco-puro);
+    text-align: center;
+    padding: 0 1.5rem;
+}
+
+.hero-logo-central {
+    width: 140px !important;
+    height: 140px !important;
+    border-radius: 50%;
+    border: 2px solid var(--color-azul-brillante);
+    margin-bottom: 2rem;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    object-fit: cover;
+}
+
+.hero h2 {
+    font-family: 'Cinzel Decorative', serif;
+    font-weight: 700;
+    font-size: 2.8rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--color-azul-celeste); 
+    font-style: italic;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 2px;
+    margin-top: 15px;
+}
+
+/* ⚪ CONTENEDORES INTERNOS CLAROS */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 9rem 1.5rem 5rem 1.5rem; 
+    flex: 1;
+}
+
+.seccion-titulo {
+    font-family: 'Cinzel', serif;
+    font-size: 2.2rem;
+    color: var(--color-azul-marino);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 3rem;
+}
+
+.seccion-titulo::after {
+    content: "♦";
+    display: block;
+    font-size: 0.8rem;
+    color: var(--color-azul-brillante);
+    margin-top: 0.5rem;
+}
+
+.about-content {
+    text-align: center;
+    font-size: 1.15rem;
+    color: var(--color-azul-profundo);
+    line-height: 1.9;
+    background: var(--color-blanco-puro);
+    padding: 3rem 2rem;
+    border-radius: 6px;
+    border: 1px solid var(--color-gris-hielo);
+    box-shadow: 0 15px 40px rgba(15, 28, 48, 0.04);
+}
+
+.simbolos-container, .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 3rem;
+    margin-top: 1rem;
+}
+
+.simbolo-box, .card {
+    background-color: var(--color-blanco-puro);
+    border-radius: 6px;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(15, 28, 48, 0.04);
+    border: 1px solid var(--color-gris-hielo);
+}
+.card { padding: 0; overflow: hidden; }
+
+.card img { height: 250px; width: 100%; object-fit: cover; }
+.simbolo-box img { height: 220px; object-fit: contain; margin-bottom: 1.5rem; }
+
+.card-body { padding: 2rem 1.5rem; }
+.simbolo-box h4, .card-body h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.25rem;
+    color: var(--color-azul-marino);
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+}
+
+.simbolo-box p, .card-body p {
+    font-size: 0.95rem;
+    color: var(--color-azul-profundo);
+    font-weight: 400; 
+}
+
+/* ✉️ FORMULARIO DE CONTACTO */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--color-blanco-puro);
+    padding: 3.5rem 2rem;
+    border-radius: 6px;
+    border: 1px solid var(--color-gris-hielo);
+    box-shadow: 0 30px 70px rgba(15, 28, 48, 0.05);
+}
+.form-group { margin-bottom: 2rem; }
+.form-group label {
+    display: block;
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-azul-marino);
+}
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 1rem 0;
+    border: none;
+    border-bottom: 1px solid var(--color-azul-brillante);
+    font-size: 0.95rem;
+    background-color: transparent;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--color-azul-profundo);
+}
+.form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-bottom-color: var(--color-azul-profundo);
+}
+
+button {
+    display: block;
+    width: 100%;padding: 1.1rem;
+    background-color: var(--color-azul-marino);
+    color: var(--color-blanco-puro);
+    border: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+}
+button:hover {
+    background-color: var(--color-azul-profundo);
+    transform: translateY(-2px);
+}
+    /* 🟥 PIE DE PÁGINA */
+    footer {
+    background-color: var(--color-azul-profundo);
+    color: rgba(192, 208, 239, 0.5);
+    text-align: center;
+    padding: 4rem 2rem;
+    font-size: 0.85rem;
+    margin-top: auto;
+}
+
+footer h4 {
+    font-family: 'Cinzel', serif;
+    color: var(--color-blanco-puro);
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 0.6rem;
+}
+    footer p.footer-lema {
+    color: var(--color-azul-celeste);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    }
+/* 📱 RESPONSIVO PARA CELULARES */
+@media (max-width: 768px) {
+    header { padding: 1.2rem 1.5rem; }
+    .hero h2 { font-size: 2.2rem; }
+    nav { width: 100vw; }
+    form { padding: 2.5rem 1.5rem; }
+    }
+
+
+    
+
