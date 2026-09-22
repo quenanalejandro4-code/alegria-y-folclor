@@ -1,0 +1,660 @@
+/* Paleta Premium: Verde Esmeralda y Blanco */
+:root {
+    --color-verde-acento: #0D5C3A;      
+    --color-verde-oscuro: #0A291B; 
+    --color-fondo-seda: #F5F7F6;        
+    --color-blanco: #FFFFFF;      
+    --color-texto: #1A2420;       
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--color-fondo-seda);
+    color: var(--color-texto);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+body.fade-in {
+    opacity: 1;
+}
+
+/* Guardas de Rombos Laterales */
+body::before, body::after {
+    content: "";
+    position: fixed;
+    top: 80px;
+    bottom: 0;
+    width: 24px;
+    z-index: 5;
+    opacity: 0.15;
+    pointer-events: none;
+    background-image: linear-gradient(135deg, var(--color-verde-acento) 25%, transparent 25%), 
+                      linear-gradient(225deg, var(--color-verde-acento) 25%, transparent 25%), 
+                      linear-gradient(45deg, var(--color-verde-acento) 25%, transparent 25%), 
+                      linear-gradient(315deg, var(--color-verde-acento) 25%, transparent 25%);
+    background-position: 12px 0, 12px 0, 0 0, 0 0;
+    background-size: 24px 24px;
+    background-repeat: repeat-y;
+}
+body::before { left: 15px; }
+body::after { right: 15px; }
+
+/* ENCABEZADO CORREGIDO CON FILOSOFÍA FLEXBOX */
+header {
+    background-color: var(--color-verde-oscuro);
+    color: var(--color-fondo-seda);
+    padding: 0.8rem 3rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    height: 80px; /* Altura fija para que nada se monte */
+}
+
+/* Caja contenedora rígida para domar el SVG de Gravit */
+.logo-container {/* Reemplaza o edita estos bloques en tu estilos.css */
+
+header {
+    background-color: var(--color-verde-oscuro);
+    color: var(--color-fondo-seda);
+    padding: 0 3rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    height: 80px; /* Altura fija estricta para el menú de arriba */
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Control estricto para el logo en el menú superior */
+.logo-container img {
+    width: 45px !important;
+    height: 45px !important;
+    max-width: 45px !important;
+    max-height: 45px !important;
+    object-fit: cover !important; /* Corta la imagen en un círculo perfecto sin estirarla */
+    border-radius: 50%;
+    border: 1px solid var(--color-verde-acento);
+    padding: 2px;
+    background-color: #FFFFFF;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    width: 280px; /* Evita que el título se encime en el logo */
+}
+
+/* Domado absoluto del SVG en el menú */
+.logo-container img {
+    width: 45px !important;
+    height: 45px !important;
+    max-width: 45px !important;
+    max-height: 45px !important;
+    border-radius: 50%;
+    border: 1px solid var(--color-verde-acento);
+    background-color: #FFFFFF;
+    margin-right: 15px; /* Empuja el texto hacia la derecha obligatoriamente */
+    flex-shrink: 0; /* Prohíbe que el navegador lo aplaste */
+}
+
+header fond {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: nowrap; /* Evita que el texto se rompa en dos líneas */
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    color: rgba(245, 247, 246, 0.75);
+    text-decoration: none;
+    margin-left: 2rem;
+    font-weight: 500;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+nav a:hover, nav a.active { color: var(--color-blanco); }
+
+/* Vistas y Contenedores con Aire de Separación */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 2rem; /* Añade espacio arriba y abajo para que las cajas no se peguen */
+    flex: 1;
+}
+
+.seccion-titulo {
+    font-size: 2.4rem;
+    color: var(--color-verde-oscuro);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 4rem; /* Separa los títulos del contenido inferior */
+}
+
+.seccion-titulo::after {
+    content: "♦";
+    display: block;
+    font-size: 0.8rem;
+    color: var(--color-verde-acento);
+    margin-top: 0.5rem;
+}
+
+/* Portada de Inicio */
+/* Busca el bloque .hero en tu estilos.css y reemplázalo por este: */
+.hero {
+    background: linear-gradient(rgba(10, 41, 27, 0.82), rgba(10, 41, 27, 0.88)), url('fondo_portada.jpg') no-repeat center center/cover;
+    height: calc(100vh - 80px); /* Ocupa exactamente el alto restante de la pantalla del celular */
+    height: calc(-webkit-fill-available - 80px); /* Parche especial para navegadores móviles */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-fondo-seda);
+    text-align: center;
+    padding: 0 1.5rem;
+    position: relative;
+}
+
+
+.hero-logo-central {
+    width: 120px !important;
+    height: 120px !important;
+    max-width: 120px !important;
+    max-height: 120px !important;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 2rem;
+    background-color: #FFFFFF;
+    padding: 4px;
+}
+
+.hero h2 {
+    font-size: 3.5rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    color: #4ade80; 
+    font-style: italic;
+    margin-top: 10px;
+}
+
+/* Separación entre tarjetas de contenido */
+.about-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.2rem;
+    font-family: 'Playfair Display', serif;
+    color: #38423E;
+    line-height: 2;
+    background: var(--color-blanco);
+    padding: 3.5rem;
+    border-radius: 4px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.02);
+}
+
+.simbolos-container, .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 4rem; /* Gran separación para que los cuadros jamás se toquen */
+    margin-top: 1rem;
+}
+
+.simbolo-box, .card {
+    background-color: var(--color-blanco);
+    border-radius: 4px;
+    padding: 2.5rem;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0,0,0,0.02);
+}
+.card { padding: 0; overflow: hidden; }
+
+.card img { height: 260px; width: 100%; object-fit: cover; }
+.simbolo-box img { height: 240px; width: 100%; object-fit: contain; margin-bottom: 2rem; }
+
+.card-body { padding: 2.5rem; }
+
+.simbolo-box h4, .card-body h4 {
+    color: var(--color-verde-oscuro);
+    font-size: 1.35rem;
+    margin-bottom: 1rem; /* Separa los subtítulos de sus textos descriptivos */
+    text-transform: uppercase;
+}
+
+/* Formulario */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--color-blanco);
+    padding: 4rem;
+    border-radius: 4px;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.03);
+}
+.form-group { margin-bottom: 2.5rem; } /* Más separación entre campos de texto */
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 1rem 0;
+    border: none;
+    border-bottom: 1px solid #BAC7C1;
+    font-size: 0.95rem;
+    background-color: transparent;
+}
+
+/* Botón Hamburguesa */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 26px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+.menu-toggle span { width: 100%; height: 2px; background-color: var(--color-fondo-seda); }
+
+footer {
+    background-color: var(--color-verde-oscuro);
+    color: rgba(245, 247, 246, 0.6);
+    text-align: center;
+    padding: 4rem 2rem;
+    font-size: 0.85rem;
+    margin-top: auto;
+}
+
+@media (max-width: 768px) {
+    body::before, body::after { display: none; }
+    header { padding: 1.2rem 2rem; }
+    .menu-toggle { display: flex; }
+    nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(10, 41, 27, 0.98);
+        backdrop-filter: blur(15px);
+        flex-direction: column;
+        padding: 2rem 0;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+    }
+    nav a { margin: 1.2rem 0; width: 100%; text-align: center; }
+}
+/* ==========================================
+   🔗 IMPORTACIÓN DE TIPOGRAFÍA REDONDA (GOOGLE FONTS)
+   ========================================== */
+@import url('https://googleapis.com');
+
+:root {
+    --color-verde-acento: #0D5C3A;      
+    --color-verde-oscuro: #0A291B; 
+    --color-fondo-seda: #F5F7F6;        
+    --color-blanco: #FFFFFF;      
+    --color-texto: #1A2420;       
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--color-fondo-seda);
+    color: var(--color-texto);
+    font-family: 'Outfit', sans-serif; /* Letra redonda para todo el sitio */
+    font-weight: 400;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700; /* Títulos más gruesos y llamativos */
+    letter-spacing: 0.5px;
+}
+
+/* Guardas de Rombos Laterales */
+body::before, body::after {
+    content: "";
+    position: fixed;
+    top: 80px;
+    bottom: 0;
+    width: 24px;
+    z-index: 5;
+    opacity: 0.15;
+    pointer-events: none;
+    background-image: linear-gradient(135deg, var(--color-verde-acento) 25%, transparent 25%), 
+                      linear-gradient(225deg, var(--color-verde-acento) 25%, transparent 25%), 
+                      linear-gradient(45deg, var(--color-verde-acento) 25%, transparent 25%), 
+                      linear-gradient(315deg, var(--color-verde-acento) 25%, transparent 25%);
+    background-position: 12px 0, 12px 0, 0 0, 0 0;
+    background-size: 24px 24px;
+    background-repeat: repeat-y;
+}
+body::before { left: 15px; }
+body::after { right: 15px; }
+
+/* Encabezado */
+header {
+    background-color: var(--color-verde-oscuro);
+    color: var(--color-fondo-seda);
+    padding: 0 3rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    height: 80px; 
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo-container img {
+    width: 45px !important;
+    height: 45px !important;
+    max-width: 45px !important;
+    max-height: 45px !important;
+    object-fit: cover !important;
+    border-radius: 50%;
+    border: 1px solid var(--color-verde-acento);
+    padding: 2px;
+    background-color: #FFFFFF;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+header h1 {
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap; 
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    color: rgba(245, 247, 246, 0.75);
+    text-decoration: none;
+    margin-left: 2rem;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+nav a:hover, nav a.active { color: var(--color-blanco); }
+
+/* Portada de Inicio */
+.hero {
+    background: linear-gradient(rgba(10, 41, 27, 0.82), rgba(10, 41, 27, 0.88)), url('fondo_portada.jpg') no-repeat center center/cover;
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-fondo-seda);
+    text-align: center;
+    padding: 0 1rem;
+}
+
+.hero-logo-central {
+    width: 120px !important;
+    height: 120px !important;
+    max-width: 120px !important;
+    max-height: 120px !important;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 1.5rem;
+}
+
+.hero h2 {
+    font-weight: 800;
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.hero p {
+    font-size: 1.3rem;
+    color: #4ade80; 
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+/* Contenedores */
+.container {
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    flex: 1;
+}
+
+.seccion-titulo {
+    font-size: 2.2rem;
+    color: var(--color-verde-oscuro);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 3rem;
+}
+
+.seccion-titulo::after {
+    content: "♦";
+    display: block;
+    font-size: 0.8rem;
+    color: var(--color-verde-acento);
+    margin-top: 0.5rem;
+}
+
+.about-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.15rem;
+    color: #38423E;
+    line-height: 1.8;
+    background: var(--color-blanco);
+    padding: 3rem;
+    border-radius: 4px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.02);
+}
+
+.simbolos-container, .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 3rem;
+}
+
+.simbolo-box, .card {
+    background-color: var(--color-blanco);
+    border-radius: 4px;
+    padding: 2.5rem;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0,0,0,0.02);
+}
+.card { padding: 0; overflow: hidden; }
+
+.card img { height: 260px; object-fit: cover; }
+.simbolo-box img { height: 240px; object-fit: contain; margin-bottom: 1.5rem; }
+
+.card-body { padding: 2rem; }
+
+.simbolo-box h4, .card-body h4 {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+}
+
+.simbolo-box p, .card-body p {
+    font-size: 0.95rem;
+    color: #55635D;
+    font-weight: 300;
+}
+
+/* Formulario */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--color-blanco);
+    padding: 3.5rem;
+    border-radius: 4px;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.03);
+}
+.form-group { margin-bottom: 2rem; }
+.form-group label {
+    display: block;
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-bottom: 1px solid #BAC7C1;
+    font-size: 0.95rem;
+    background-color: transparent;
+    font-family: 'Outfit', sans-serif;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-bottom-color: var(--color-verde-acento);
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 1.1rem;
+    background-color: var(--color-verde-oscuro);
+    color: var(--color-fondo-seda);
+    border: 1px solid transparent;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+}
+
+/* Pie de Página */
+footer {
+    background-color: var(--color-verde-oscuro);
+    color: rgba(245, 247, 246, 0.6);
+    text-align: center;
+    padding: 4rem 2rem;
+    font-size: 0.85rem;
+}
+
+footer h4 {
+    color: var(--color-fondo-seda);
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 0.6rem;
+}
+
+footer p.footer-lema {
+    color: #4ade80;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    header { padding: 1.2rem 2rem; }
+    nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(10, 41, 27, 0.98);
+        backdrop-filter: blur(15px);
+        flex-direction: column;
+        padding: 2rem 0;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+    }
+    nav a { margin: 1.2rem 0; width: 100%; text-align: center; }
+    .hero h2 { font-size: 2.2rem; }
+}

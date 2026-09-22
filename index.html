@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Alegría y Folclor | Bienvenidos</title>
+    
+    <!-- Conexión con Google Fonts -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Montserrat:wght@500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --color-verde-oscuro: #0A291B; 
+            --color-verde-acento: #0D5C3A;
+            --color-fondo-pantalla: #0A291B; /* Forzamos el hermoso verde oscuro de tu logo como fondo */
+            --color-blanco: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Bloqueamos el tamaño al 100% exacto de la pantalla del celular o PC */
+        body {
+            background-color: var(--color-fondo-pantalla);
+            height: 100vh;
+            height: -webkit-fill-available; /* Ajuste especial para navegadores de celulares */
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Evita que la pantalla ruede hacia abajo */
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body.fade-in {
+            opacity: 1;
+        }
+
+        /* Caja contenedora perfectamente centrada en el espacio de la pantalla */
+        .logo-welcome-container {
+            text-align: center;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 20px;
+            user-select: none;
+        }
+
+        /* El círculo blanco de tu logotipo */
+        .logo-welcome-container img {
+            width: 220px; 
+            height: 220px;
+            max-width: 60vw; /* Se encoge proporcionalmente en pantallas delgadas */
+            max-height: 60vw;
+            object-fit: cover; 
+            border-radius: 50%;
+            border: 3px solid var(--color-blanco);
+            padding: 6px;
+            background-color: #FFFFFF;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            animation: respirarLogo 4s ease-in-out infinite;
+        }
+
+        /* Tu título principal con la fuente premium Cinzel Decorative */
+        .welcome-title {
+            font-family: 'Cinzel Decorative', serif;
+            font-weight: 700;
+            font-size: 2.2rem;
+            color: var(--color-blanco);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 2.5rem;
+            line-height: 1.2;
+            max-width: 90vw;
+        }
+
+        /* Tu lema oficial con la fuente Montserrat */
+        .enter-text {
+            margin-top: 1.5rem; 
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: #4ade80; /* El verde encendido que se lee hermoso sobre el fondo oscuro */
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+        }
+
+        @keyframes respirarLogo {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* Efectos visuales de iluminación solo en computadoras */
+        @media (min-width: 769px) {
+            .logo-welcome-container:hover img {
+                transform: scale(1.03);
+                box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+            }
+            .logo-welcome-container:hover .enter-text {
+                color: var(--color-blanco);
+                letter-spacing: 2px;
+            }
+            .welcome-title {
+                font-size: 3rem;
+            }
+        }
+
+        body.fade-out {
+            opacity: 0;
+            transform: scale(0.97);
+            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="welcome-audio" src="viento_andino.mp3" preload="auto"></audio>
+
+    <div class="logo-welcome-container" id="enter-site-btn">
+        <img src="logo_alegria_y_folclor.png" alt="Logotipo Oficial Alegría y Folclor">
+        <h2 class="welcome-title">Alegría y Folclor</h2>
+        <div class="enter-text">Bailando con el corazón</div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(() => {
+                document.body.classList.add("fade-in");
+            }, 50);
+
+            const enterBtn = document.getElementById("enter-site-btn");
+            const audioEfecto = document.getElementById("welcome-audio");
+            let yaHizoClic = false;
+
+            function entrarAlSitio() {
+                if (yaHizoClic) return;
+                yaHizoClic = true;
+
+                if (audioEfecto) {
+                    audioEfecto.volume = 0.4;
+                    audioEfecto.play().catch(error => {
+                        console.log("Audio omitido de forma segura:", error);
+                    });
+                }
+
+                document.body.classList.add("fade-out");
+                
+                setTimeout(() => {
+                    window.location.href = "inicio.html";
+                }, 400);
+            }
+
+            enterBtn.addEventListener("click", entrarAlSitio);
+            enterBtn.addEventListener("touchstart", (e) => {
+                e.preventDefault();
+                entrarAlSitio();
+            });
+        });
+    </script>
+
+</body>
+</html>
